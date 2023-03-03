@@ -4,7 +4,7 @@ const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box>
-      <Flex justify="space-between">
+      <Flex justify="space-between" align="center">
         <Heading size="sm">Where in the world</Heading>
 
         <HStack>
