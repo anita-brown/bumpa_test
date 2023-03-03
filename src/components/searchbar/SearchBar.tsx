@@ -11,7 +11,7 @@ const SearchBar = () => {
         <Input type="text" placeholder="Search for a country..." />
       </InputGroup>
       <Box w="20%">
-        <Select />
+        <Select placeholder="Filter by region" />
       </Box>
     </Flex>
   );
