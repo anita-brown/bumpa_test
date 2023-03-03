@@ -1,7 +1,10 @@
-export const countryOptions = [
-    { value: 'af', label: 'Africa' },
-    { value: 'na', label: 'America' },
-    { value: 'as', label: 'Asia' },
-    { value: 'eu', label: 'Europe' },
-    { value: 'oc', label: 'Oceania' },
- ]
+export const countryOptions: {
+  value: string;
+  label: string;
+}[] = [
+        { value: 'Africa', label: 'Africa' },
+        { value: 'Americas', label: 'Americas' },
+        { value: 'Asia', label: 'Asia' },
+        { value: 'Europe', label: 'Europe' },
+        { value: 'Oceania', label: 'Oceania' }
+];
