@@ -12,7 +12,7 @@ const CountryCard = ({ country }: { country: ICountry }) => {
       overflow="hidden"
       boxShadow="md"
     >
-      <Image w="100%" h="150px" src={country.flag} alt={country.name} />
+      <Image src={country.flag} alt={country.name} />
       <Box p="6">
         <Flex alignItems="baseline">
           <Text

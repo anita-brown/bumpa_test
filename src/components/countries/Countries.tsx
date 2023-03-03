@@ -21,16 +21,20 @@ const Countries = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesPerPage] = useState(20);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [regionFilter, setRegionFilter] = useState('');
-  const filteredCountries = countries.filter((country: any) =>
-    regionFilter ? country.region === regionFilter : true
-  );
+
+  const filteredCountries = countries
+    .filter((country: ICountry) => country.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter((country: ICountry) =>
+      country.region.toLowerCase().includes(regionFilter.toLowerCase())
+    );
 
   const lastCountryIndex = currentPage * countriesPerPage;
   const firstCountryIndex = lastCountryIndex - countriesPerPage;
   const currentCountries = filteredCountries.slice(firstCountryIndex, lastCountryIndex);
 
-  const totalPages = Math.ceil(countries.length / countriesPerPage);
+  const totalPages = Math.ceil(filteredCountries.length / countriesPerPage);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -39,11 +43,15 @@ const Countries = () => {
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
-  const handleRegionChange = (selectedOption: any) => {
-    setRegionFilter(selectedOption ? selectedOption.value : '');
+
+  const handleRegionFilterChange = (event: any) => {
+    setRegionFilter(event.value);
     setCurrentPage(1);
   };
-
+  const handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    setCurrentPage(1);
+  };
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -74,13 +82,20 @@ const Countries = () => {
       >
         <InputGroup w={{ base: '100%', md: '30%' }}>
           <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
-          <Input color="gray.500" type="text" placeholder="Search for a country..." />
+          <Input
+            color="gray.500"
+            type="text"
+            placeholder="Search for a country..."
+            value={searchQuery}
+            onChange={handleSearchQueryChange}
+          />
         </InputGroup>
         <Box w={{ base: '100%', md: '30%' }}>
           <Select
             placeholder="Filter by region"
+            onChange={handleRegionFilterChange}
             options={countryOptions}
-            onChange={handleRegionChange}
+            value={countryOptions.find((option) => option.value === regionFilter)}
           />
         </Box>
       </Flex>
