@@ -11,7 +11,6 @@ const CountryDetails = () => {
       try {
         const response = await fetch(`https://restcountries.com/v2/alpha/${countryCode}`);
         const data = await response.json();
-        console.log(data);
         setCountry(data);
       } catch (error) {
         console.error(error);
