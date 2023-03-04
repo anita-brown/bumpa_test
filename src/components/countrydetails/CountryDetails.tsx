@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Text, Image, Flex, Spinner, Badge } from '@chakra-ui/react';
 import { Link, useParams } from 'react-router-dom';
-
+import { ArrowBackIcon } from '@chakra-ui/icons';
 const CountryDetails = () => {
   const [country, setCountry] = useState([]) as any;
   const { countryCode } = useParams();
@@ -28,76 +28,86 @@ const CountryDetails = () => {
       </Flex>
     );
   }
-
+  const handleBackClick = () => {
+    window.history.back();
+  };
   return (
-    <Flex flexDir={{ base: 'column', md: 'row' }} gap="4rem" py="5rem" >
-      <Image
-        w={{ base: '100%', md: '50%' }}
-        h={{ base: '40vh', md: '50vh' }}
-        src={country.flag}
-        alt={country.name}
-        mb="4"
-      />
-      <Box>
-        <Text fontSize="3xl" fontWeight="bold" mb="4">
-          {country.name}
+    <Box>
+      <Flex gap=".5rem" align="center" mt="2rem" onClick={handleBackClick}>
+        <ArrowBackIcon bgSize={40} />
+        <Text color="gray.500" as="span" >
+          Back
         </Text>
-        <Box mb="4">
-          <Text as="span" fontWeight="bold">
-            Population:
-          </Text>{' '}
-          {country.population?.toLocaleString()}
-        </Box>
-        <Box mb="4">
-          <Text as="span" fontWeight="bold">
-            Region:
-          </Text>{' '}
-          {country.region}
-        </Box>
-        <Box mb="4">
-          <Text as="span" fontWeight="bold">
-            Subregion:
-          </Text>{' '}
-          {country.subregion}
-        </Box>
-        <Box mb="4">
-          <Text as="span" fontWeight="bold">
-            Capital:
-          </Text>{' '}
-          {country.capital}
-        </Box>
-        <Box mb="4">
-          <Text as="span" fontWeight="bold">
-            Languages:
-          </Text>{' '}
-          {country.languages?.map((language: { name: any }) => language.name).join(', ')}
-        </Box>
-        <Box mb="4">
-          <Text as="span" fontWeight="bold">
-            Currencies:
-          </Text>{' '}
-          {country.currencies?.map((currency: { name: any }) => currency.name).join(', ')}
-        </Box>
-        <Box mb="4">
-          <Text fontWeight="bold" fontSize="lg" mt="2">
-            Border Countries:{' '}
-            {country.borders?.length > 0 ? (
-              <Flex flexWrap="wrap" mt="2" gap="1rem">
-                {country.borders.map((border: string) => (
-                  <Link key={border} to={`/countries/${border}`}>
-                    <Badge variant="outline" colorScheme="purple">
-                      {border}
-                    </Badge>
-                  </Link>
-                ))}
-              </Flex>
-            ) : (
-              'No Countries'
-            )}
+      </Flex>
+      <Flex flexDir={{ base: 'column', md: 'row' }} gap="4rem" py="5rem">
+        <Image
+          w={{ base: '100%', md: '50%' }}
+          h={{ base: '40vh', md: '50vh' }}
+          src={country.flag}
+          alt={country.name}
+          mb="4"
+        />
+        <Box>
+          <Text fontSize="3xl" fontWeight="bold" mb="4">
+            {country.name}
           </Text>
+          <Box mb="4">
+            <Text as="span" fontWeight="bold">
+              Population:
+            </Text>{' '}
+            {country.population?.toLocaleString()}
+          </Box>
+          <Box mb="4">
+            <Text as="span" fontWeight="bold">
+              Region:
+            </Text>{' '}
+            {country.region}
+          </Box>
+          <Box mb="4">
+            <Text as="span" fontWeight="bold">
+              Subregion:
+            </Text>{' '}
+            {country.subregion}
+          </Box>
+          <Box mb="4">
+            <Text as="span" fontWeight="bold">
+              Capital:
+            </Text>{' '}
+            {country.capital}
+          </Box>
+          <Box mb="4">
+            <Text as="span" fontWeight="bold">
+              Languages:
+            </Text>{' '}
+            {country.languages?.map((language: { name: any }) => language.name).join(', ')}
+          </Box>
+          <Box mb="4">
+            <Text as="span" fontWeight="bold">
+              Currencies:
+            </Text>{' '}
+            {country.currencies?.map((currency: { name: any }) => currency.name).join(', ')}
+          </Box>
+          <Box mb="4">
+            <Text fontWeight="bold" fontSize="lg" mt="2">
+              Border Countries:{' '}
+              {country.borders?.length > 0 ? (
+                <Flex flexWrap="wrap" mt="2" gap="1rem">
+                  {country.borders.map((border: string) => (
+                    <Link key={border} to={`/countries/${border}`}>
+                      <Badge variant="outline" colorScheme="purple">
+                        {border}
+                      </Badge>
+                    </Link>
+                  ))}
+                </Flex>
+              ) : (
+                'No Countries'
+              )}
+            </Text>
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </Box>
   );
 };
 
