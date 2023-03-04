@@ -25,9 +25,11 @@ const Countries = () => {
   const [regionFilter, setRegionFilter] = useState('');
 
   const filteredCountries = countries
-    .filter((country: ICountry) => country.name.toLowerCase().includes(searchQuery.toLowerCase()))
     .filter((country: ICountry) =>
-      country.region.toLowerCase().includes(regionFilter.toLowerCase())
+      country?.name?.toLowerCase().includes(searchQuery?.toLowerCase())
+    )
+    .filter((country: ICountry) =>
+      country?.region?.toLowerCase().includes(regionFilter?.toLowerCase())
     );
 
   const lastCountryIndex = currentPage * countriesPerPage;
@@ -58,7 +60,6 @@ const Countries = () => {
         setLoading(true);
         const response = await fetch('https://restcountries.com/v2/all');
         const data = await response.json();
-
         setCountries(data);
         setLoading(false);
       } catch (error) {
@@ -107,7 +108,7 @@ const Countries = () => {
         <>
           <SimpleGrid mt="4rem" columns={[1, 2, 3, 4]} spacing={4}>
             {currentCountries.map((country: ICountry) => (
-                <CountryCard key={country.alpha3Code} country={country} />
+              <CountryCard key={country.alpha3Code} country={country} />
             ))}
           </SimpleGrid>
           <Flex justifyContent="center" mt="2rem" mb="5rem">
