@@ -1,14 +1,14 @@
-import { Box } from '@chakra-ui/react';
-import Countries from './components/countries/Countries';
-import Header from './components/header/Header';
-
+import React, { Fragment } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
 
 function App() {
   return (
-    <Box w="100vw" h="100vh" px={{base:"2rem",md:"4rem"}} py="2rem">
-      <Header />
-      <Countries/>
-    </Box>
+    <Fragment>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Fragment>
   );
 }
 

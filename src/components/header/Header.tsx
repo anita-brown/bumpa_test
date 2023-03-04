@@ -1,11 +1,14 @@
 import { Box, Flex, Heading, HStack, Icon, Text, useColorMode } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box>
       <Flex justify="space-between" align="center">
-        <Heading size="sm">Where in the world</Heading>
+        <Link to="/">
+          <Heading size="sm">Where in the world</Heading>
+        </Link>
 
         <HStack>
           <Icon onClick={toggleColorMode}>

@@ -74,7 +74,7 @@ const Countries = () => {
     <>
       <Flex
         flexDir={{ base: 'column', md: 'row' }}
-        gap={{ base: '1rem', md: '7rem' }}
+        gap={{ base: '1rem', md: '4rem' }}
         color={color}
         w="100%"
         justify="space-between"
@@ -107,7 +107,7 @@ const Countries = () => {
         <>
           <SimpleGrid mt="4rem" columns={[1, 2, 3, 4]} spacing={4}>
             {currentCountries.map((country: ICountry) => (
-              <CountryCard key={country.alpha3Code} country={country} />
+                <CountryCard key={country.alpha3Code} country={country} />
             ))}
           </SimpleGrid>
           <Flex justifyContent="center" mt="2rem" mb="5rem">

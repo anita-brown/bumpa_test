@@ -1,8 +1,10 @@
 import { Flex, Box, Text, Image } from '@chakra-ui/react';
 import { ICountry } from '../../types/global';
+import { Link} from 'react-router-dom';
 
 const CountryCard = ({ country }: { country: ICountry }) => {
   return (
+     <Link key={country.alpha3Code} to={`/countries/${country.alpha3Code}`}>
     <Box
       boxSize={{ base: '100%', md: '100%' }}
       height={{ base: '100%', md: '100%' }}
@@ -12,7 +14,7 @@ const CountryCard = ({ country }: { country: ICountry }) => {
       overflow="hidden"
       boxShadow="md"
     >
-      <Image src={country.flag} alt={country.name} />
+      <Image h="150px" w="100%" src={country.flag} alt={country.name} />
       <Box p="6">
         <Flex alignItems="baseline">
           <Text
@@ -65,7 +67,8 @@ const CountryCard = ({ country }: { country: ICountry }) => {
           <Text>{country.capital}</Text>
         </Flex>
       </Box>
-    </Box>
+      </Box>
+    </Link>
   );
 };
 
